@@ -192,6 +192,75 @@ https://sf.pelda.hu/index/cancel/12345678
 
 ---
 
+## A skill fájl helye
+
+A tényleges agent skill dokumentáció a repo gyökerében található:
+
+```text
+salesform_payment_skill.md
+```
+
+Ez tartalmazza a teljes SalesForm fizetési integrációs logikát, mezőmappinget, webhook szabályokat, URL paramétereket, előfizetéses működést és az agenteknek szóló fejlesztési utasításokat.
+
+A `README.md` csak áttekintő dokumentáció. A kódoló agentnek mindig a `salesform_payment_skill.md` fájlt kell elsődleges forrásként használnia.
+
+---
+
+## Használat különböző kódoló rendszerekben
+
+### Claude / Claude Code / Claude Cowork
+
+Add meg a projekt mellé a `salesform_payment_skill.md` fájlt, majd ezt írd az agentnek:
+
+```text
+Olvasd be teljes egészében a salesform_payment_skill.md fájlt, és annak szabályai alapján készíts SalesForm fizetési integrációt a meglévő projektbe.
+
+Ne feltételezz SalesForm checkout API-t. Fix SalesForm terméklinkeket kell használni URL paraméterezéssel. Fizetési státuszt csak webhook alapján módosíts.
+```
+
+### Antigravity
+
+Tedd a fájlt a projekt gyökerébe, majd az első feladat előtt add ezt az utasítást:
+
+```text
+Mielőtt kódot írsz, olvasd be a salesform_payment_skill.md fájlt. A SalesForm integrációt kizárólag az abban leírt működés szerint készítsd el.
+
+Először keresd meg a meglévő payment/order/subscription/user logikát, és ahhoz illeszd hozzá az integrációt. Ne írj új fizetési architektúrát, ha már van meglévő.
+```
+
+### Lovable
+
+Lovable-ben érdemes a skill lényegét a projekt promptba vagy knowledge részbe tenni:
+
+```text
+Use the salesform_payment_skill.md rules as the payment integration specification.
+
+SalesForm does not create checkout sessions through an API. The app must redirect users to a fixed SalesForm product URL with URL parameters. Payment status must only be updated from the SalesForm webhook.
+```
+
+### VS Code / Cursor / Windsurf jellegű AI fejlesztőkörnyezet
+
+Tedd a fájlt a repo gyökerébe, majd hivatkozz rá a chatben:
+
+```text
+A SalesForm integrációhoz használd a salesform_payment_skill.md fájlt elsődleges specifikációként.
+
+Először olvasd be, majd nézd át a meglévő billing/payment/subscription kódot, és csak utána javasolj módosítást.
+```
+
+### GitHub Copilot
+
+Copilot esetén a fájl legyen a repo része, és a releváns fájlok szerkesztésekor hivatkozz rá kommentben vagy chatben:
+
+```text
+Follow the integration rules from salesform_payment_skill.md.
+Do not assume a SalesForm checkout API.
+Use fixed SalesForm product URLs with URL parameters.
+Activate access only from webhook processing.
+```
+
+---
+
 ## Agent használati szabály
 
 A skillt használó agent először mindig keresse meg a meglévő projektben:
